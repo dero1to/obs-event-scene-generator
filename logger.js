@@ -5,6 +5,11 @@ export class Logger {
 
   static #currentLevel = Logger.INFO;
 
+  // ANSI エスケープコード
+  static #RED = '\x1b[31m';
+  static #GREEN = '\x1b[32m';
+  static #RESET = '\x1b[0m';
+
   /**
    * ログレベルを設定
    * @param {string} level - ログレベル (ERROR/INFO/DEBUG)
@@ -16,20 +21,20 @@ export class Logger {
   }
 
   /**
-   * エラーログを出力
+   * エラーログを出力（赤色）
    * @param {string} message - ログメッセージ
    */
   static error(message) {
-    console.error(`[ERROR] ${message}`);
+    console.error(`${Logger.#RED}[ERROR] ${message}${Logger.#RESET}`);
   }
 
   /**
-   * 情報ログを出力
+   * 情報ログを出力（緑色）
    * @param {string} message - ログメッセージ
    */
   static info(message) {
     if ([Logger.INFO, Logger.DEBUG].includes(Logger.#currentLevel)) {
-      console.log(`[INFO] ${message}`);
+      console.log(`${Logger.#GREEN}[INFO] ${message}${Logger.#RESET}`);
     }
   }
 
