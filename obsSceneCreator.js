@@ -9,20 +9,16 @@ export class ObsSceneCreator {
    * サンプルシーンを作成し、ソースを追加
    */
   async createSampleScene() {
-    try {
-      const sceneName = 'サンプルシーン';
-      
-      // シーンの作成
-      await this.createScene(sceneName);
-      
-      // ディスプレイキャプチャーを追加
-      await this.addDisplayCapture(sceneName);
-      
-      // テキストソースを追加
-      await this.addTextSource(sceneName);
-    } catch (error) {
-      throw error;
-    }
+    const sceneName = 'サンプルシーン';
+    
+    // シーンの作成
+    await this.createScene(sceneName);
+    
+    // ディスプレイキャプチャーを追加
+    await this.addDisplayCapture(sceneName);
+    
+    // テキストソースを追加
+    await this.addTextSource(sceneName);
   }
 
   /**
