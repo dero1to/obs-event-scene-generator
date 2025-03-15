@@ -69,7 +69,7 @@ export class ObsSceneCreator {
         sceneItemTransform: {
           boundsAlignment: 0,
           boundsHeight: 1080,
-          boundsType: 2, // OBS_BOUNDS_SCALE_INNER
+          boundsType: 'OBS_BOUNDS_STRETCH',
           boundsWidth: 1920,
           positionX: 0,
           positionY: 0,
