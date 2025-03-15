@@ -45,5 +45,6 @@ export class ObsConnection {
       Logger.error('切断エラー: ' + error);
       throw error;
     }
+    await new Promise(resolve => setTimeout(resolve, 3000));
   }
 }

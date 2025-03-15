@@ -7,7 +7,7 @@ import { ObsSceneManager } from './obsSceneManager.js';
 
 const main = async () => {
   // ログレベルをDEBUGに設定
-  Logger.setLevel(Logger.DEBUG);
+  Logger.setLevel(Logger.INFO);
 
   const connection = new ObsConnection();
   
@@ -40,5 +40,4 @@ const main = async () => {
   }
 };
 
-// プログラムを実行
 main();
