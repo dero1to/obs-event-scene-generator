@@ -21,11 +21,10 @@ const connect = async () => {
     const creator = new ObsSceneCreator(obs);
     await creator.createSampleScene();
 
-    // シーン管理とトランジション
+    // シーン管理
     const manager = new ObsSceneManager(obs);
     await manager.setStudioMode(true);
-    await manager.setPreviewScene('サンプルシーン');
-    
+    await manager.setProgramScene('サンプルシーン');
 
     // WebSocket接続を閉じて、プログラムを終了
     await obs.disconnect();
