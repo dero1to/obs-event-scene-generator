@@ -10,7 +10,8 @@ export class ObsCleaner {
    */
   async cleanAll() {
     await this.removeAllInputs();
-    await this.removeScene('サンプルシーン');
+    await this.removeAllScenes();
+    await setTimeout(() => {}, 1000);
   }
 
   /**
@@ -19,11 +20,11 @@ export class ObsCleaner {
   async removeAllInputs() {
     try {
       const { inputs } = await this.obs.call('GetInputList');
+      Logger.debug('ソース一覧:', inputs.map(input => input.inputName) || "none");
       for (const input of inputs) {
         await this.obs.call('RemoveInput', {
           inputName: input.inputName
         });
-        Logger.debug(`ソース "${input.inputName}" を削除しました`);
       }
     } catch (error) {
       Logger.error('ソース削除エラー:' + error);
@@ -32,7 +33,47 @@ export class ObsCleaner {
   }
 
   /**
-   * 指定されたシーンを削除
+   * ソースを削除
+   * @param {string} inputName ソース名
+   * @returns {Promise<void>}
+   * @throws {Error} ソース削除エラー
+   * @example
+   * await cleaner.removeInput('ソース名');
+   */
+  async removeInput(inputName) {
+    try {
+      await this.obs.call('RemoveInput', {
+        inputName: inputName
+      });
+      Logger.debug(`ソース "${inputName}" を削除しました`);
+    } catch (error) {
+      Logger.error('ソース削除エラー:' + error);
+      throw error;
+    }
+  }
+
+
+
+  /**
+   * すべてのシーンを削除
+   */
+  async removeAllScenes() {
+    try {
+      const { scenes } = await this.obs.call('GetSceneList');
+      Logger.debug('シーン一覧:', scenes.map(scene => scene.sceneName)|| "none");
+      for (const scene of scenes) {
+        await this.obs.call('RemoveScene', {
+          sceneName: scene.sceneName
+        });
+      }
+    } catch (error) {
+      Logger.error('シーン削除エラー:' + error);
+      throw error;
+    }
+  }
+
+  /**
+   * すべてのシーンコレクションを削除
    */
   async removeScene(sceneName) {
     try {
@@ -41,10 +82,8 @@ export class ObsCleaner {
       });
       Logger.debug(`シーン "${sceneName}" を削除しました`);
     } catch (error) {
-      // シーンが存在しない場合は無視
-      if (!error.message.includes('not found')) {
-        throw error;
-      }
+      Logger.error('シーン削除エラー:' + error);
+      throw error;
     }
   }
 }

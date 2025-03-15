@@ -31,12 +31,15 @@ const connect = async () => {
     await manager.setProgramScene('サンプルシーン');
 
     // WebSocket接続を閉じて、プログラムを終了
+    await setTimeout(() => {}, 5000);
     await obs.disconnect();
     Logger.info('すべての操作が完了しました');
     process.exit(0);
 
   } catch (error) {
     Logger.error('エラーが発生しました: ' + error);
+    await setTimeout(() => {}, 5000);
+    await obs.disconnect();
     process.exit(1);
   }
 };
