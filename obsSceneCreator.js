@@ -21,6 +21,9 @@ export class ObsSceneCreator {
       
       // プログラムシーンとして設定
       await this.setAsProgramScene(sceneName);
+      
+      // プレビューシーンとして設定
+      await this.setAsPreviewScene(sceneName);
     } catch (error) {
       throw error;
     }
@@ -126,5 +129,15 @@ export class ObsSceneCreator {
       sceneName: sceneName
     });
     console.log('シーンをプログラムに設定しました');
+  }
+
+  /**
+   * プレビューシーンとして設定
+   */
+  async setAsPreviewScene(sceneName) {
+    await this.obs.call('SetCurrentPreviewScene', {
+      sceneName: sceneName
+    });
+    console.log('シーンをプレビューに設定しました');
   }
 }
