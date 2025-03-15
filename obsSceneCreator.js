@@ -12,22 +12,12 @@ export class ObsSceneCreator {
       
       // シーンの作成
       await this.createScene(sceneName);
-      for (let i = 0; i < 3; i++) {
-        await this.createScene(sceneName + i);
-      }
-
       
       // ディスプレイキャプチャーを追加
       await this.addDisplayCapture(sceneName);
       
       // テキストソースを追加
       await this.addTextSource(sceneName);
-      
-      // プログラムシーンとして設定
-      await this.setAsProgramScene(sceneName);
-      
-      // プレビューシーンとして設定
-      await this.setAsPreviewScene(sceneName);
     } catch (error) {
       throw error;
     }
@@ -123,25 +113,5 @@ export class ObsSceneCreator {
       }
       throw error;
     }
-  }
-
-  /**
-   * プログラムシーンとして設定
-   */
-  async setAsProgramScene(sceneName) {
-    await this.obs.call('SetCurrentProgramScene', {
-      sceneName: sceneName
-    });
-    console.log('シーンをプログラムに設定しました');
-  }
-
-  /**
-   * プレビューシーンとして設定
-   */
-  async setAsPreviewScene(sceneName) {
-    await this.obs.call('SetCurrentPreviewScene', {
-      sceneName: sceneName
-    });
-    console.log('シーンをプレビューに設定しました');
   }
 }

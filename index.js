@@ -2,6 +2,7 @@ import OBSWebSocket from 'obs-websocket-js';
 import 'dotenv/config';
 import { ObsCleaner } from './obsCleaner.js';
 import { ObsSceneCreator } from './obsSceneCreator.js';
+import { ObsSceneManager } from './obsSceneManager.js';
 
 const obs = new OBSWebSocket();
 
@@ -19,6 +20,12 @@ const connect = async () => {
     // シーンとソースを作成
     const creator = new ObsSceneCreator(obs);
     await creator.createSampleScene();
+
+    // シーン管理とトランジション
+    const manager = new ObsSceneManager(obs);
+    await manager.setStudioMode(true);
+    await manager.setPreviewScene('サンプルシーン');
+    
 
     // WebSocket接続を閉じて、プログラムを終了
     await obs.disconnect();
