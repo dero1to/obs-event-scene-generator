@@ -1,0 +1,14 @@
+{
+  "name": "obs-websocket-scene-example",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "OBS WebSocket scene creation example",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "obs-websocket-js": "^5.0.3"
+  }
+}
