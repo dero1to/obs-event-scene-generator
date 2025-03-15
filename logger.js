@@ -7,6 +7,7 @@ export class Logger {
 
   // ANSI エスケープコード
   static #RED = '\x1b[31m';
+  static #YELLOW = '\x1b[33m';
   static #GREEN = '\x1b[32m';
   static #RESET = '\x1b[0m';
 
@@ -27,6 +28,15 @@ export class Logger {
   static error(message) {
     console.error(`${Logger.#RED}[ERROR] ${message}${Logger.#RESET}`);
   }
+
+  /**
+   * 警告ログを出力（黄色）
+   * @param {string} message - ログメッセージ
+   */
+  static warn(message) {
+    console.warn(`${Logger.#YELLOW}[WARN] ${message}${Logger.#RESET}`);
+  }
+
 
   /**
    * 情報ログを出力（緑色）
