@@ -12,6 +12,10 @@ export class ObsSceneCreator {
       
       // シーンの作成
       await this.createScene(sceneName);
+      for (let i = 0; i < 3; i++) {
+        await this.createScene(sceneName + i);
+      }
+
       
       // ディスプレイキャプチャーを追加
       await this.addDisplayCapture(sceneName);
