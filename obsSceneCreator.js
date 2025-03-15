@@ -1,3 +1,5 @@
+import { Logger } from './logger.js';
+
 export class ObsSceneCreator {
   constructor(obs) {
     this.obs = obs;
@@ -31,10 +33,10 @@ export class ObsSceneCreator {
       await this.obs.call('CreateScene', {
         sceneName: sceneName
       });
-      console.log(`シーンを作成しました: ${sceneName}`);
+      Logger.debug(`シーンを作成しました: ${sceneName}`);
     } catch (error) {
       if (error.message.includes('already exists')) {
-        console.log(`シーン "${sceneName}" は既に存在します`);
+        Logger.debug(`シーン "${sceneName}" は既に存在します`);
         return;
       }
       throw error;
@@ -53,7 +55,7 @@ export class ObsSceneCreator {
         inputName: displayCaptureName,
         inputKind: 'display_capture'
       });
-      console.log('ディスプレイキャプチャーを追加しました');
+      Logger.debug('ディスプレイキャプチャーを追加しました');
 
       // サイズと位置を調整
       const { sceneItemId } = await this.obs.call('GetSceneItemId', {
@@ -67,7 +69,7 @@ export class ObsSceneCreator {
         sceneItemTransform: {
           boundsAlignment: 0,
           boundsHeight: 1080,
-          boundsType: 'OBS_BOUNDS_STRETCH',
+          boundsType: 2, // OBS_BOUNDS_SCALE_INNER
           boundsWidth: 1920,
           positionX: 0,
           positionY: 0,
@@ -76,10 +78,10 @@ export class ObsSceneCreator {
           scaleY: 1
         }
       });
-      console.log('ディスプレイキャプチャーのサイズと位置を調整しました');
+      Logger.debug('ディスプレイキャプチャーのサイズと位置を調整しました');
     } catch (error) {
       if (error.message.includes('already exists')) {
-        console.log(`ソース "${displayCaptureName}" は既に存在します`);
+        Logger.debug(`ソース "${displayCaptureName}" は既に存在します`);
         return;
       }
       throw error;
@@ -105,10 +107,10 @@ export class ObsSceneCreator {
           }
         }
       });
-      console.log('テキストソースを追加しました');
+      Logger.debug('テキストソースを追加しました');
     } catch (error) {
       if (error.message.includes('already exists')) {
-        console.log(`ソース "${textSourceName}" は既に存在します`);
+        Logger.debug(`ソース "${textSourceName}" は既に存在します`);
         return;
       }
       throw error;

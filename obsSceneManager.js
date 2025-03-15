@@ -1,3 +1,5 @@
+import { Logger } from './logger.js';
+
 export class ObsSceneManager {
   constructor(obs) {
     this.obs = obs;
@@ -10,7 +12,7 @@ export class ObsSceneManager {
     await this.obs.call('SetCurrentProgramScene', {
       sceneName: sceneName
     });
-    console.log(`シーン "${sceneName}" をプログラムに設定しました`);
+    Logger.debug(`シーン "${sceneName}" をプログラムに設定しました`);
   }
 
   /**
@@ -20,7 +22,7 @@ export class ObsSceneManager {
     await this.obs.call('SetCurrentPreviewScene', {
       sceneName: sceneName
     });
-    console.log(`シーン "${sceneName}" をプレビューに設定しました`);
+    Logger.debug(`シーン "${sceneName}" をプレビューに設定しました`);
   }
 
   /**
@@ -30,6 +32,6 @@ export class ObsSceneManager {
     await this.obs.call('SetStudioModeEnabled', {
       studioModeEnabled: enabled
     });
-    console.log(`スタジオモードを${enabled ? '有効' : '無効'}にしました`);
+    Logger.debug(`スタジオモードを${enabled ? '有効' : '無効'}にしました`);
   }
 }

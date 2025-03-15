@@ -1,3 +1,5 @@
+import { Logger } from './logger.js';
+
 export class ObsCleaner {
   constructor(obs) {
     this.obs = obs;
@@ -8,9 +10,7 @@ export class ObsCleaner {
    */
   async cleanAll() {
     await this.removeAllInputs();
-    await this.removeAllScenes();
-    // 削除処理が完了するまで待機
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await this.removeScene('サンプルシーン');
   }
 
   /**
@@ -23,10 +23,10 @@ export class ObsCleaner {
         await this.obs.call('RemoveInput', {
           inputName: input.inputName
         });
-        console.log(`ソース "${input.inputName}" を削除しました`);
+        Logger.debug(`ソース "${input.inputName}" を削除しました`);
       }
     } catch (error) {
-      console.error('ソース削除エラー:', error);
+      Logger.error('ソース削除エラー:' + error);
       throw error;
     }
   }
@@ -34,15 +34,12 @@ export class ObsCleaner {
   /**
    * 指定されたシーンを削除
    */
-  async removeAllScenes() {
+  async removeScene(sceneName) {
     try {
-        const { scenes } = await this.obs.call('GetSceneList');
-        for (const scene of scenes) {
-            await this.obs.call('RemoveScene', {
-            sceneName: scene.sceneName
-            });
-            console.log(`シーン "${scene.sceneName}" を削除しました`);
-        }
+      await this.obs.call('RemoveScene', {
+        sceneName: sceneName
+      });
+      Logger.debug(`シーン "${sceneName}" を削除しました`);
     } catch (error) {
       // シーンが存在しない場合は無視
       if (!error.message.includes('not found')) {
