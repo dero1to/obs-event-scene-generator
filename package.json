@@ -6,10 +6,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "obs": "node ./src/obs-sdk/example.js"
+    "obs": "node ./src/obs-sdk/example.js",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest --verbose"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
     "obs-websocket-js": "^5.0.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

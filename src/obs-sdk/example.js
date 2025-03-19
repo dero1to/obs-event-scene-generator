@@ -1,4 +1,4 @@
-import { OBSClient } from './client.js';
+import { ObsClient } from './client.js';
 import dotenv from 'dotenv';
 
 // 環境変数の読み込み
@@ -6,7 +6,7 @@ dotenv.config();
 
 async function example() {
   // OBSクライアントの初期化（autoReconnect無効）
-  const obs = new OBSClient({
+  const obs = new ObsClient({
     autoReconnect: false,
     retryAttempts: 3
   });
@@ -23,12 +23,15 @@ async function example() {
     // シーン操作の例
     console.log('=== シーン操作 ===');
     // console.log(await obs.scenes.exists('サンプルシーン1'));    
-    await obs.scenes.removeAll();
+    // await obs.scenes.removeAll();
+    // await obs.scenes.create('サンプルシーン1');
 
     // 入力ソース操作の例
     console.log('\n=== 入力ソース操作 ===');
-    const inputs = await obs.inputs.list();
-    console.log('入力ソース一覧:', inputs.map(input => input.inputName));
+    // const inputs = await obs.inputs.list();
+    // console.log('入力ソース一覧:', inputs.map(input => input.inputName));
+    // const currentScene = await obs.scenes.getProgramName();
+    // console.log('現在のシーン:', currentScene);
 
     // 出力操作の例
     console.log('\n=== 出力操作 ===');

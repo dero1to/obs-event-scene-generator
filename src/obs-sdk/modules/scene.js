@@ -15,9 +15,9 @@ export class SceneModule extends BaseModule {
    * 現在のプログラムシーンを取得
    * @returns {Promise<string>} 現在のシーン名
    */
-  async getCurrentScene() {
-    const { currentProgramSceneName } = await this._call('GetCurrentProgramScene');
-    return currentProgramSceneName;
+  async getProgramName() {
+    const program = await this._call('GetCurrentProgramScene');
+    return program.sceneName || null;
   }
 
   /**
@@ -42,7 +42,7 @@ export class SceneModule extends BaseModule {
    * @returns {Promise<void>}
    */
   async create(sceneName) {
-    if (!await this.exists(sceneName)) {
+    if (await this.exists(sceneName)) {
       Logger.warn(`シーン "${sceneName}" は既に存在します`);
       return;
     }
@@ -58,8 +58,7 @@ export class SceneModule extends BaseModule {
    * @returns {Promise<void>}
    */
   async remove(sceneName) {
-    
-    if (!(await this.exists(sceneName))) {
+    if (!await this.exists(sceneName)) {
       Logger.warn(`シーン "${sceneName}" は存在しません`);
       return;
     }

@@ -4,7 +4,7 @@ import { SceneModule } from './modules/scene.js';
 import { InputModule } from './modules/input.js';
 import { OutputModule } from './modules/output.js';
 
-export class OBSClient {
+export class ObsClient {
   /**
    * OBSクライアントの初期化
    * @param {Object} [options={}] 設定オプション
