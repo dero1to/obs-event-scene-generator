@@ -5,7 +5,8 @@
   "description": "OBS WebSocket scene creation example",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "obs": "node ./src/obs-sdk/example.js"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
